@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule 110</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="input-bar"></div>
+    <div class="output-bar"></div>
+    <div class="button-container">
+        <button onclick="start()">Esegui</button>
+        <button onclick="random()">Casuale</button>
+        <button onclick="substitute()">Alimenta</button>
+        <label for="">
+            <input type="range" id="input-speed" value="50" min="0" max="1000">
+            <span>
+                Intervallo: <span id="speed">50.000</span>ms
+            </span>
+        </label>
+        <div>
+            <p class="open-modal-button" onclick="openModal()">Regole</p>
+            <textarea name="" id="rules" cols="30" rows="10">
+   c1 === c0 && c2 === c0 && c3 !== c0
+|| c1 === c0 && c2 !== c0 && c3 === c0
+|| c1 !== c0 && c2 === c0 && c3 === c0
+|| c1 !== c0 && c2 === c0 && c3 !== c0
+|| c1 !== c0 && c2 !== c0 && c3 === c0</textarea>
+        </div>
+    </div>
+    <div class="no-click" id="no-click"></div>
+	<div class="modal">
+		<div class="modal-body">
+			<div class="modal-header">
+				<h1>Spiegazione regole</h1>
+			</div>
+			<div class="modal-text">
+                Rule 110 consiste nel controllare, tre alla volta ([[1, 2, 3], [2, 3, 4], [3, 5, 6], ...]), un gruppo di celle che possono avere due
+                stati: inattivo e attivo (0/1), e di ritornare un valore (0/1, inattivo/attivo) in base a delle regole.
+                In questo caso abbiamo 75 celle per l'input e 75 celle per l'output (le ultime due non sono utilizzabili).
+                <br>
+                <br>
+                Le regole di base di Rule 110 sono:
+                <ul>
+                    <li>Se solo le prime due celle sono attive, ritorna 1;</li>
+                    <li>Se solo la prima e terza cella sono attive, ritorna 1;</li>
+                    <li>Se solo le ultime due celle sono attive, ritorna 1;</li>
+                    <li>Se solo la seconda cella è attiva, ritorna 1;</li>
+                    <li>Se solo la terza cella è attiva, ritorna 1;</li>
+                    <li>Altrimenti ritorna 0</li>
+                </ul>
+                Queste regole sono rappresentate da un espressione booleana nell'area di testo che analizzeremo riga per riga.
+                <br>
+                Nota: inserire spazi o andare a capo è puramente opzionale, ma è consigliato per migliorare la leggibilità.
+                <br>
+                <code>c1 === c0 && c2 === c0 && c3 !== c0</code>
+                <br>
+                In questa riga è scritto esplicitamente "Se la prima cella (<kbd>c1</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e
+                (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <br>
+                <code>|| c1 === c0 && c2 !== c0 && c3 === c0</code>
+                <br>
+                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
+                è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <br>
+                <code>|| c1 !== c0 && c2 === c0 && c3 === c0</code>
+                <br>
+                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la sconda cella (<kbd>c2</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
+                è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <br>
+                <code>|| c1 !== c0 && c2 === c0 && c3 !== c0</code>
+                <br>
+                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
+                non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <br>
+                <code>|| c1 !== c0 && c2 !== c0 && c3 === c0</code>
+                <br>
+                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
+                è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <br>
+                Altrimenti ritorna 0.
+                <br>
+                <br>
+                Se vogliamo modificare le regole affinché venga ritornato 1 solo se le prime due o le ultime due sono attive, seguendo la spiegazione di
+                sopra, dovremmo cambiare le regole in:
+                <br>
+                <code>
+                    &InvisibleComma; &InvisibleComma; &InvisibleComma; c1 === c0 && c2 === c0 && c3 !== c0
+                    <br>
+                    || c1 !== c0 && c2 === c0 && c3 === c0
+                </code>
+                <br>
+                (è possibile utilizzare <kbd>==</kbd> e <kbd>!=</kbd> al posto di <kbd>===</kbd> e <kbd>!==</kbd>)
+                <br>
+                <br>
+                Oltre ai simboli usati di sopra, è possibile utilizzare parentesi ed x-or (<kbd>^</kbd>) per semplificare le condizioni tramite le regole
+                dell'algebra booleana.
+                <br>
+                Inoltre, inserire soltanto <kbd>true</kbd> senza spazi farà ritornare sempre 1.
+                <br>
+                <br>
+                Infine provare ad utilizzare un qualunque altro carattere alfanumerico causerà un errore.
+			</div>
+		</div>
+	</div>
+</body>
+<script src="main.js"></script>
+</html>
