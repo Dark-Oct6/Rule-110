@@ -19,6 +19,50 @@ for (let i = 0; i < 75; i++) {
     barI.appendChild(cell);
 }
 
+function addCells() {
+    for (let i = 0; i < 25; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+    
+        cell.addEventListener("click", function() {
+            let bg = this.style.backgroundColor;
+            this.style.backgroundColor = bg === "rgb(51, 204, 51)" ? "#000" : "#3c3";
+        });
+    
+        const barI = document.getElementsByClassName("input-bar")[0];
+        barI.appendChild(cell);
+    }
+    
+    for (let i = 0; i < 25; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+    
+        const barI = document.getElementsByClassName("output-bar")[0];
+        barI.appendChild(cell);
+    }
+
+    const cells = document.getElementsByClassName("cell").length / 2;
+    document.getElementById("IC").innerHTML = cells;
+    document.getElementById("OC").innerHTML = cells;
+}
+
+function removeCells() {
+    const cells = document.getElementsByClassName("cell").length / 2;
+
+    if (cells > 0) {
+        const IB = document.getElementsByClassName("input-bar")[0];
+        const OB = document.getElementsByClassName("output-bar")[0];
+
+        for (let i = cells - 1; i >= cells - 25; i--) {
+            IB.removeChild(IB.getElementsByClassName("cell")[i]);
+            OB.removeChild(OB.getElementsByClassName("cell")[i]);
+        }
+
+        document.getElementById("IC").innerHTML = cells - 25;
+        document.getElementById("OC").innerHTML = cells - 25;
+    }
+}
+
 function checkCells(a, b, c) {
     let c1 = a;
     let c2 = b;
