@@ -59,8 +59,8 @@ textarea {
     background-color: #121212;
     color: #fff;
     text-align: left;
-    width: 310px;
-    height: 90px;
+    width: 150px;
+    height: 100px;
 }
 
 code {
@@ -69,10 +69,6 @@ code {
     margin-block: 10px;
     padding: 10px;
     border-radius: 5px;
-}
-
-textarea, code, kbd {
-    font-family: monospace;
 }
 
 .input-bar, .output-bar {
@@ -153,4 +149,16 @@ textarea, code, kbd {
 .modal-text {
     margin-inline: 5%;
     margin-bottom: 25px;
+}
+
+.letter-cap {
+    color: coral;
+}
+
+.bool-long {
+    color: violet;
+}
+
+.bool-short {
+    color: cyan;
 }

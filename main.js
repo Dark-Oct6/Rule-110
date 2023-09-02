@@ -79,20 +79,39 @@ function checkCells(a, b, c) {
     */
 
     const forbiddenTokens = [
-        'a', 'b', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 4, 5, 6, 7, 8, 9
+        'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
     ];
 
-    if (rule !== "true") {
+    if (rule !== "true" && rule !== "false" && rule !== '') {
         for (let i in forbiddenTokens) {
-            if (rule.includes(forbiddenTokens[i])) {
+            if (rule.toLowerCase().includes(forbiddenTokens[i])) {
                 console.log("Qualunque cosa tu stia cercando di fare, non funzionerà");
                 return false;
             }
-        }    
+        }
+        rule = rule.toUpperCase();
+        rule = rule.replace(/!A/g, "c1 !== c0");
+        rule = rule.replace(/A/g, "c1 === c0");
+        rule = rule.replace(/!B/g, "c2 !== c0");
+        rule = rule.replace(/B/g, "c2 === c0");
+        rule = rule.replace(/!C/g, "c3 !== c0");
+        rule = rule.replace(/C/g, "c3 === c0");
+        rule = rule.replace(/\*/g, "&&");
+        rule = rule.replace(/\+/g, "||");
         rule = rule.replace(/c0/g, "'rgb(51, 204, 51)'");
         return eval(rule); 
     }
-    return true;
+    else if (rule === "true") {
+        return true;
+    }
+    else if (rule === "false" || rule === '') {
+        return false;
+    }
+    else {
+        // questa parte di codice non dovrebbe essere raggiungibile, però siccome la coccia mi dice così la tengo
+        console.log("Qualunque cosa tu stia cercando di fare, non funzionerà");
+        return false;
+    }
 }
 
 function start() {
@@ -108,7 +127,7 @@ function start() {
 
         setTimeout(function() {
             if (i < cellsI.length) {
-                cellsI[i].style.borderColor = "#cc3";
+                cellsI[i].style.borderColor = "#00f";
 
                 if (i > 1) {
                     const x = cellsI[i - 2].style.backgroundColor;
@@ -117,11 +136,15 @@ function start() {
                     if (checkCells(x, y, z)) {
                         cellsO[i - 2].style.backgroundColor = "#3c3";
                     }
+
+                    cellsO[i - 2].style.borderColor = "#00f";
                 }
             }
 
             if (i > 2) {
                 cellsI[i - 3].style.borderColor = "#c33";
+
+                cellsO[i - 3].style.borderColor = "#c33";
             }
 
             if (i === cellsI.length + 2) {
@@ -129,6 +152,22 @@ function start() {
             }
         }, speed * i);
     }
+
+    let str = '';
+    for (let i = 0; i < cellsI.length; i++) {
+        const col = cellsI[i].style.backgroundColor;
+        str += col === "rgb(51, 204, 51)" ? 1 : 0;
+    }
+    console.log(str);
+
+    setTimeout(function() {
+        let str = '';
+        for (let i = 0; i < cellsO.length; i++) {
+            const col = cellsO[i].style.backgroundColor;
+            str += col === "rgb(51, 204, 51)" ? 1 : 0;
+        }
+        console.log(str);
+    }, cellsO.length * speed);
 }
 
 function random() {

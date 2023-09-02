@@ -24,12 +24,12 @@
         </label>
         <div>
             <p class="open-modal-button" onclick="openModal()">Regole</p>
-            <textarea name="" id="rules" cols="30" rows="10">
-   c1 === c0 && c2 === c0 && c3 !== c0
-|| c1 === c0 && c2 !== c0 && c3 === c0
-|| c1 !== c0 && c2 === c0 && c3 === c0
-|| c1 !== c0 && c2 === c0 && c3 !== c0
-|| c1 !== c0 && c2 !== c0 && c3 === c0</textarea>
+            <textarea id="rules" placeholder="false">
+   A *  B * !C
++  A * !B *  C
++ !A *  B *  C
++ !A *  B * !C
++ !A * !B *  C</textarea>
         </div>
     </div>
     <div class="no-click" id="no-click"></div>
@@ -55,52 +55,50 @@
                 </ul>
                 Queste regole sono rappresentate da un espressione booleana nell'area di testo che analizzeremo riga per riga.
                 <br>
-                Nota: inserire spazi o andare a capo è puramente opzionale, ma è consigliato per migliorare la leggibilità.
+                <code>&InvisibleComma; &InvisibleComma; &InvisibleComma; <kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbs class="letter-cap">B</kbs> <kbd class="bool-short">*</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">C</kbd></code>
                 <br>
-                <code>c1 === c0 && c2 === c0 && c3 !== c0</code>
+                Se la prima cella e attiva (<kbd class="letter-cap">A</kbd>) e (<kbd class="bool-short">*</kbd>) la seconda cella è attiva (<kbd class="letter-cap">B</kbd>) e (<kbd class="bool-short">*</kbd>) la terza cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">C</kbd>)...
                 <br>
-                In questa riga è scritto esplicitamente "Se la prima cella (<kbd>c1</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e
-                (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <code><kbd class="bool-short">+</kbd> &InvisibleComma; <kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">B</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbd class="letter-cap">C</kbd></code>
                 <br>
-                <code>|| c1 === c0 && c2 !== c0 && c3 === c0</code>
+                ...oppure (<kbd class="bool-short">+</kbd>) se la prima cella è attiva (<kbd class="letter-cap">A</kbd>) e (<kbd class="bool-short">*</kbd>) la seconda cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">B</kbd>) e (<kbd class="bool-short">*</kbd>) la terza cella è attiva (<kbd class="letter-cap">C</kbd>)...
                 <br>
-                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
-                è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <code><kbd class="bool-short">+</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbd class="letter-cap">B</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbd class="letter-cap">C</kbd></code>
                 <br>
-                <code>|| c1 !== c0 && c2 === c0 && c3 === c0</code>
+                ...oppure (<kbd class="bool-short">+</kbd>) se la prima cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd>) e (<kbd class="bool-short">*</kbd>) la seconda cella è attiva (<kbd class="letter-cap">B</kbd>) e (<kbd class="bool-short">*</kbd>) la terza cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">C</kbd>)...
                 <br>
-                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la sconda cella (<kbd>c2</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
-                è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <code><kbd class="bool-short">+</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbd class="letter-cap">B</kbd> <kbd class="bool-short">*</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">C</kbd></code>
                 <br>
-                <code>|| c1 !== c0 && c2 === c0 && c3 !== c0</code>
+                ...oppure (<kbd class="bool-short">+</kbd>) se la prima cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd>) e (<kbd class="bool-short">*</kbd>) la seconda cella è attiva (<kbd class="letter-cap">B</kbd>) e (<kbd class="bool-short">*</kbd>) la terza cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">C</kbd>)...
                 <br>
-                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
-                non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                <code><kbd class="bool-short">+</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">B</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbd class="letter-cap">C</kbd></code>
                 <br>
-                <code>|| c1 !== c0 && c2 !== c0 && c3 === c0</code>
+                ...oppure (<kbd class="bool-short">+</kbd>) se la prima cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd>) e (<kbd class="bool-short">*</kbd>) la seconda cella non è attiva (<kbd class="bool-long">!</kbd><kbd class="letter-cap">B</kbd>) e (<kbd class="bool-short">*</kbd>) la terza cella è attiva (<kbd class="letter-cap">C</kbd>)...
                 <br>
-                "Oppure (<kbd>||</kbd>) se la prima cella (<kbd>c1</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la seconda cella (<kbd>c2</kbd>) non è (<kbd>!==</kbd>) attiva (<kbd>c0</kbd>) e (<kbd>&&</kbd>) la terza cella (<kbd>c3</kbd>)
-                è (<kbd>===</kbd>) attiva (<kbd>c0</kbd>) ritorna 1".
+                ...Ritorna 1,
                 <br>
-                Altrimenti ritorna 0.
+                altrimenti ritorna 0. 
                 <br>
                 <br>
                 Se vogliamo modificare le regole affinché venga ritornato 1 solo se le prime due o le ultime due sono attive, seguendo la spiegazione di
                 sopra, dovremmo cambiare le regole in:
                 <br>
                 <code>
-                    &InvisibleComma; &InvisibleComma; &InvisibleComma; c1 === c0 && c2 === c0 && c3 !== c0
+                    &InvisibleComma; &InvisibleComma; &InvisibleComma; <kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> <kbd class="letter-cap">B</kbd> <kbd class="bool-short">*</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">C</kbd>
                     <br>
-                    || c1 !== c0 && c2 === c0 && c3 === c0
+                    <kbd class="bool-short">+</kbd> <kbd class="bool-long">!</kbd><kbd class="letter-cap">A</kbd> <kbd class="bool-short">*</kbd> <kbd class="letter-cap">B</kbd> <kbd class="bool-short">*</kbd> &InvisibleComma; <kbd class="letter-cap">C</kbd class="letter-cap">
                 </code>
                 <br>
-                (è possibile utilizzare <kbd>==</kbd> e <kbd>!=</kbd> al posto di <kbd>===</kbd> e <kbd>!==</kbd>)
+                Nota: è possibile utilizzare lettere minuscole ed omettere spazi e ritorni a capo.
+                <br>
+                Nota 2: nell'area di testo la sintassi non viene evidenziata.
                 <br>
                 <br>
-                Oltre ai simboli usati di sopra, è possibile utilizzare parentesi ed x-or (<kbd>^</kbd>) per semplificare le condizioni tramite le regole
-                dell'algebra booleana.
+                Oltre ai simboli di sopra, è possibile utilizzare qualunque espressione booleana con parentesi, AND (<kbd class="bool-short">+</kbd>/<kbd class="bool-long">&&</kbd>),
+                OR (<kbd class="bool-short">+</kbd>/<kbd class="bool-long">||</kbd>), XOR (<kbd class="bool-long">^</kbd>) e NOT (<kbd class="bool-long">!</kbd>).
                 <br>
-                Inoltre, inserire soltanto <kbd>true</kbd> senza spazi farà ritornare sempre 1.
+                Inoltre, inserire soltanto <kbd class="letter-cap">true</kbd> senza spazi farà ritornare sempre 1 mentre inserire soltanto
+                <kbd class="letter-cap">false</kbd> senza spazi (o niente) farà ritornare sempre 0.
                 <br>
                 <br>
                 Infine provare ad utilizzare un qualunque altro carattere alfanumerico causerà un errore.
