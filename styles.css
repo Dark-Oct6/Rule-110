@@ -41,26 +41,32 @@ input[type="range"]::-webkit-slider-runnable-track {
     height: 15px;
     margin-bottom: -3px;
     background: #000;
-    border: 1px solid #808080;
-    border-radius: 10px;
+    border: 2px solid #c33;
 }
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background-color: #808080;
-    height: 15px;
-    width: 15px;
-    margin-top: -1px;
-    border-radius: 10px;
+    background-color: #fff;
+    height: 10.2px;
+    width: 10.2px;
+    margin-top: 0.4px;
+    border-radius: 0;
+}
+
+input[type="number"] {
+    color: #fff;
+    background-color: #000;
+    border: 2px solid #c33;
 }
 
 textarea {
-    background-color: #121212;
+    background-color: #000;
     color: #fff;
     text-align: left;
     width: 150px;
     height: 100px;
+    border: 2px solid #c33;
 }
 
 code {
@@ -88,8 +94,10 @@ code {
     transition: border-color 0.5s ease, scale 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* sperimentare border-radius con transition */
 .input-bar > .cell:hover {
     box-shadow: 0 0 10px 5px salmon;
+    border-color: salmon;
     scale: 1.05;
     cursor: pointer;
 }

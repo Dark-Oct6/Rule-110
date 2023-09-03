@@ -44,6 +44,8 @@ function addCells() {
     const cells = document.getElementsByClassName("cell").length / 2;
     document.getElementById("IC").innerHTML = cells;
     document.getElementById("OC").innerHTML = cells;
+
+    updateTimes();
 }
 
 function removeCells() {
@@ -61,6 +63,8 @@ function removeCells() {
         document.getElementById("IC").innerHTML = cells - 25;
         document.getElementById("OC").innerHTML = cells - 25;
     }
+
+    updateTimes();
 }
 
 function checkCells(a, b, c) {
@@ -153,21 +157,21 @@ function start() {
         }, speed * i);
     }
 
-    let str = '';
+    /*let str = '';
     for (let i = 0; i < cellsI.length; i++) {
         const col = cellsI[i].style.backgroundColor;
         str += col === "rgb(51, 204, 51)" ? 1 : 0;
     }
-    console.log(str);
+    console.log(str);*/
 
-    setTimeout(function() {
+    /*setTimeout(function() {
         let str = '';
         for (let i = 0; i < cellsO.length; i++) {
             const col = cellsO[i].style.backgroundColor;
             str += col === "rgb(51, 204, 51)" ? 1 : 0;
         }
         console.log(str);
-    }, cellsO.length * speed);
+    }, cellsO.length * speed);*/
 }
 
 function random() {
@@ -191,12 +195,36 @@ function substitute() {
     }
 }
 
+function formatTime(t) {
+
+    t -= 0;
+
+    if (t < 1000) {
+        return t.toFixed(3 - Math.floor(Math.log10(Math.max(t, 1)))) + "ms";
+    }
+    return (t / 1000).toFixed(7 - Math.floor(Math.log10(Math.max(t, 1)))) + "s";
+}
+
 let speed = 50;
-document.getElementById("input-speed").addEventListener("input", function() {
-    speed = document.getElementById("input-speed").value;
-    let d = 4 - Math.floor(Math.log10(speed ** 1 + 1));
-    speed = (speed ** 1).toFixed(d);
-    document.getElementById("speed").innerHTML = speed;
+function updateTimes() {
+    speed = document.getElementById("input-speed-range").value;
+
+    document.getElementById("input-speed-number").value = speed;
+
+    document.getElementById("speed").innerHTML = formatTime(speed);
+
+    cells = document.getElementsByClassName("cell").length / 2;
+    document.getElementById("total-time").innerHTML = formatTime(speed * cells);
+}
+
+document.getElementById("input-speed-range").addEventListener("input", updateTimes);
+
+document.getElementById("input-speed-number").addEventListener("input", function() {
+    speed = document.getElementById("input-speed-number").value;
+
+    document.getElementById("input-speed-range").value = speed;
+
+    updateTimes();
 });
 
 function openModal() {

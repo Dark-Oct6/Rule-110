@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rule 110</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,9 +18,11 @@
         <button onclick="addCells()">Aggiungi</button>
         <button onclick="removeCells()">Rimuovi</button>
         <label for="">
-            <input type="range" id="input-speed" value="50" min="0" max="1000">
+            <input type="range" id="input-speed-range" value="50" min="0" max="1000">
+            <input type="number" id="input-speed-number" value="50" min="0" max="1000">
+            <br>
             <span>
-                Intervallo: <span id="speed">50.000</span>ms
+                Intervallo: <span id="speed">50.00ms</span> (<span id="total-time">3.750s</span> tot)
             </span>
         </label>
         <div>
