@@ -14,13 +14,14 @@ button {
     padding: 5px 20px;
     border: 2px solid #c33;
     user-select: none;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, text-shadow 0.2s ease;
     color: #fff;
 }
 
 button:hover {
     background-color: #c33;
     cursor: pointer;
+    text-shadow: 0 0 10px #fff;
 }
 
 label {
@@ -94,11 +95,9 @@ code {
     transition: border-color 0.5s ease, scale 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* sperimentare border-radius con transition */
 .input-bar > .cell:hover {
     box-shadow: 0 0 10px 5px salmon;
     border-color: salmon;
-    scale: 1.05;
     cursor: pointer;
 }
 

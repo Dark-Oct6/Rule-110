@@ -154,6 +154,8 @@ function start() {
             if (i === cellsI.length + 2) {
                 document.getElementById("no-click").style.display = "none";
             }
+
+            document.getElementById("eta").innerHTML = formatTime(Math.max((cellsI.length - i) * speed, 0));
         }, speed * i);
     }
 
@@ -215,6 +217,7 @@ function updateTimes() {
 
     cells = document.getElementsByClassName("cell").length / 2;
     document.getElementById("total-time").innerHTML = formatTime(speed * cells);
+    document.getElementById("eta").innerHTML = formatTime(speed * cells);
 }
 
 document.getElementById("input-speed-range").addEventListener("input", updateTimes);
