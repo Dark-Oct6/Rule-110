@@ -20,48 +20,48 @@ for (let i = 0; i < 75; i++) {
 }
 
 function addCells() {
+    const barI = document.getElementsByClassName("input-bar")[0];
+    const barO = document.getElementsByClassName("output-bar")[0];
+
     for (let i = 0; i < 25; i++) {
-        const cell = document.createElement("div");
+        let cell = document.createElement("div");
+
         cell.classList.add("cell");
     
         cell.addEventListener("click", function() {
             let bg = this.style.backgroundColor;
             this.style.backgroundColor = bg === "rgb(51, 204, 51)" ? "#000" : "#3c3";
         });
-    
-        const barI = document.getElementsByClassName("input-bar")[0];
+
         barI.appendChild(cell);
-    }
-    
-    for (let i = 0; i < 25; i++) {
-        const cell = document.createElement("div");
+
+        cell = document.createElement("div");
+
         cell.classList.add("cell");
-    
-        const barI = document.getElementsByClassName("output-bar")[0];
-        barI.appendChild(cell);
+
+        barO.appendChild(cell);
     }
 
     const cells = document.getElementsByClassName("cell").length / 2;
-    document.getElementById("IC").innerHTML = cells;
-    document.getElementById("OC").innerHTML = cells;
+    document.getElementById("cellsI").innerHTML = cells;
+    document.getElementById("cellsO").innerHTML = cells;
 
     updateTimes();
 }
 
 function removeCells() {
     const cells = document.getElementsByClassName("cell").length / 2;
+    const barI = document.getElementsByClassName("input-bar")[0];
+    const barO = document.getElementsByClassName("output-bar")[0];
 
     if (cells > 0) {
-        const IB = document.getElementsByClassName("input-bar")[0];
-        const OB = document.getElementsByClassName("output-bar")[0];
-
         for (let i = cells - 1; i >= cells - 25; i--) {
-            IB.removeChild(IB.getElementsByClassName("cell")[i]);
-            OB.removeChild(OB.getElementsByClassName("cell")[i]);
+            barI.removeChild(barI.getElementsByClassName("cell")[i]);
+            barO.removeChild(barO.getElementsByClassName("cell")[i]);
         }
 
-        document.getElementById("IC").innerHTML = cells - 25;
-        document.getElementById("OC").innerHTML = cells - 25;
+        document.getElementById("cellsI").innerHTML = cells - 25;
+        document.getElementById("cellsO").innerHTML = cells - 25;
     }
 
     updateTimes();
@@ -215,7 +215,7 @@ function updateTimes() {
 
     document.getElementById("speed").innerHTML = formatTime(speed);
 
-    cells = document.getElementsByClassName("cell").length / 2;
+    const cells = document.getElementsByClassName("cell").length / 2;
     document.getElementById("total-time").innerHTML = formatTime(speed * cells);
     document.getElementById("eta").innerHTML = formatTime(speed * cells);
 }
