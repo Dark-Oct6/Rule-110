@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -7,8 +7,10 @@
 }
 
 * {
-    
     font-family: "Fira code", monospace;
+    /* Attualmente non utilizzato, ma non si sa mai
+    border-radius: 5px;
+    */
 }
 
 body {

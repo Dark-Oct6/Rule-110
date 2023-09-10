@@ -187,6 +187,15 @@ function random() {
     }
 }
 
+function invert() {
+    const cellsI = document.getElementsByClassName("input-bar")[0].getElementsByClassName("cell");
+    
+    for (let i = 0; i < cellsI.length; i++) {
+        const state = cellsI[i].style.backgroundColor;
+        cellsI[i].style.backgroundColor = state === "rgb(51, 204, 51)" ? "#000" : "#3c3";
+    }
+}
+
 function substitute() {
     const cellsI = document.getElementsByClassName("input-bar")[0].getElementsByClassName("cell");
     const cellsO = document.getElementsByClassName("output-bar")[0].getElementsByClassName("cell");
